@@ -1,0 +1,42 @@
+
+/* Global reset by way of the universal selector.  Universal selector only covers "real" elements,
+   so the ::before and ::after pseudo-elements must be included. in the rule explicitly
+*/
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+
+    /* box-sizing prop does not inherit by default.  Setting its value to "inherit" in the universal selector
+       will make it inherit.  We can then specify a value of "border-box" in the rule for the body selector.
+       Then all elements will have box-sizing of border-box by way of inheritance, rather than the universal
+       selector, which is considered better practice (cite?).
+    */
+    box-sizing: inherit;
+}
+
+/* Set the ROOT font size; this is done in "html" selector and defines the value of 1 rem.
+   We want a root font size of 10px (to make all our conversions to rems easier in the rest of our CSS),
+   but we can't specify it directly as such, since that would override any DEFAULT font size
+   which the user may have set (such as increasing it to compensate for declining eye-sight).
+   So instead, specify the root font size as a percentage, which is a percentage of the default
+   font size (whether that be browser- or user-specified).  Browsers define default font size as
+   16px; our desired value of 10px is 62.5% of 16px, so set the root font size to 62.5%.  If the
+   user overrides the browser's default font size, all our measurements will adjust accordingly.
+*/
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;    /* Include padding and border in specified height and width on block-level elements */
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
