@@ -2,7 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "compile:sass": "node-sass resources/sass/main.scss public/style.css -w",
+        "compile:sass": "node-sass resources/sass/main.scss public/style.css",
+        "watch:sass": "node-sass resources/sass/main.scss public/style.css -w",
         "dev": "vite",
         "build": "vite build"
     },
