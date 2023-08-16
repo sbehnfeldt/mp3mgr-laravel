@@ -11,18 +11,24 @@
                 <div class="p-6 text-gray-900">
                     <table>
                         <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Artist</th>
-                            <th>Album</th>
-                            <th>Track #</th>
-                            <th>Filename</th>
-                        </tr>
+                            <tr>
+                                <th>Title</th>
+                                <th>Artist</th>
+                                <th>Album</th>
+                                <th>Track #</th>
+                                <th>Filename</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td colspan="5">No data</td>
-                        </tr>
+                        @foreach($mp3s as $mp3)
+                            <tr>
+                                <td>{{$mp3->title}}</td>
+                                <td>{{$mp3->artist}}</td>
+                                <td>{{$mp3->album}}</td>
+                                <td>{{$mp3->track}}</td>
+                                <td>{{$mp3->filename}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

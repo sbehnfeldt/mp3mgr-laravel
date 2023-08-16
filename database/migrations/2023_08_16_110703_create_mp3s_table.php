@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mp3_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId( 'author_id')->references('id' )->on( 'artists' );
+            $table->foreignId( 'author_id')->nullable()->references('id' )->on( 'artists' )->nullOnDelete()->cascadeOnUpdate();
             $table->foreignId( 'album_id')->nullable()->nullOnDelete()->cascadeOnUpdate();
 
             $table->string( 'filename' )->unique();
@@ -23,15 +23,15 @@ return new class extends Migration
             $table->string( 'year' )->nullable();
             $table->string( 'publisher' )->nullable();
             $table->string( 'genre' )->nullable();
-            $table->integer( 'track' )->nullable();
+            $table->string( 'track' )->nullable();
             $table->string( 'composer' )->nullable();
             $table->string( 'album_author' )->nullable();
-            $table->bigInteger('length' )->nullable();
+            $table->string('length' )->nullable();
             $table->string( 'ufid_owner')->nullable();
             $table->string( 'ufid_identifier')->nullable();
             $table->text( 'comments')->nullable();
             $table->binary('album_art')->nullable();
-            $table->integer( 'copyright')->nullable();
+            $table->text( 'copyright')->nullable();
             $table->string( 'desc' )->nullable();
             $table->string( 'encoded' )->nullable();
             $table->string( 'url' )->nullable();

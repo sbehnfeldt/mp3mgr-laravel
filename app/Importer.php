@@ -185,8 +185,6 @@ class Importer
 
         if (array_key_exists('author', $tags)) {
             $artist = Artist::where(['name' => $tags['author']])->first();
-
-
             if (!$artist) {
                 $artist = new Artist(['name' => $tags['author']]);
                 $artist->save();
@@ -202,8 +200,13 @@ class Importer
 
 
         if ($mp3) {
-            echo("TODO: Update\n");
+//            echo("TODO: Update\n");
         } else {
+//            var_dump($tags);
+//            exit();
+            if ( array_key_exists('comments', $tags)) {
+                $tags[ 'comments' ] = $tags[ 'comments' ][ 'data' ];
+            }
             $mp3 = new Mp3File($tags);
             $mp3->save();
         }
