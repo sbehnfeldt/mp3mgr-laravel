@@ -185,4 +185,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'mp3Path' => env('MP3_PATH', './'),
+
 ];
