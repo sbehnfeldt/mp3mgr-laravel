@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->string('name')->unique();
             $table->foreignId('file_under' )->nullable()->references( 'id' )->on( 'artists' );
             $table->timestamps();
         });

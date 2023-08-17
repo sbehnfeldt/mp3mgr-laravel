@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Mp3File;
 use Exception;
@@ -192,6 +193,32 @@ class Importer
             $tags['author_id'] = $artist->id;
         }
 
+        if (array_key_exists('album', $tags)) {
+            if (isset($artist)) {
+                $album = Album::where([
+                    'artist_id' => $artist->id,
+                    'title'     => $tags['album'],
+                ]);
+            } else {
+                $album = Album::where([
+                    'title' => $tags['album']
+                ]);
+            }
+
+            $album = $album->first();
+            if (!$album) {
+                $album = new Album(['title' => $tags['album']]);
+                if (isset($artist)) {
+                    $album->artist_id = $artist->id;
+                }
+                if (array_key_exists('year', $tags)) {
+                    $album->year = $tags['year'];
+                }
+                $album->save();
+            }
+            $tags['album_id'] = $album->id;
+        }
+
         $tags['filename_hash'] = md5($tags['filename']);
 
         $mp3 = Mp3File::where([
@@ -202,10 +229,8 @@ class Importer
         if ($mp3) {
 //            echo("TODO: Update\n");
         } else {
-//            var_dump($tags);
-//            exit();
-            if ( array_key_exists('comments', $tags)) {
-                $tags[ 'comments' ] = $tags[ 'comments' ][ 'data' ];
+            if (array_key_exists('comments', $tags)) {
+                $tags['comments'] = $tags['comments']['data'];
             }
             $mp3 = new Mp3File($tags);
             $mp3->save();

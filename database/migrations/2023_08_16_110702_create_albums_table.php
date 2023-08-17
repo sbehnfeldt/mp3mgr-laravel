@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('artist_id')->nullable()->nullOnDelete()->cascadeOnUpdate();
             $table->string( 'title' );
-            $table->integer('year');
+            $table->string('year')->nullable();
             $table->timestamps();
         });
     }
