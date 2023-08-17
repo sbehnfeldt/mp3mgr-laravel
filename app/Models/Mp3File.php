@@ -16,4 +16,9 @@ class Mp3File extends Model
     {
         return $this->belongsTo(Artist::class, 'author_id');
     }
+
+    public function album()
+    {
+        return $this->belongsTo( Album::class);
+    }
 }

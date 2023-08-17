@@ -23,8 +23,8 @@
                         @foreach($mp3s as $mp3)
                             <tr>
                                 <td>{{$mp3->title}}</td>
-                                <td>{{$mp3->artist}}</td>
-                                <td>{{$mp3->album}}</td>
+                                <td>{{$mp3->artist?->name}}</td>
+                                <td>{{$mp3->album?->title}}</td>
                                 <td>{{$mp3->track}}</td>
                                 <td>{{$mp3->filename}}</td>
                             </tr>

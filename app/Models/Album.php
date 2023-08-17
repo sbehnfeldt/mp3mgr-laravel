@@ -15,4 +15,9 @@ class Album extends Model
     {
         return $this->belongsTo(Artist::class);
     }
+
+    public function tracks()
+    {
+        return $this->hasMany(Mp3File::class, 'album_id');
+    }
 }
