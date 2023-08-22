@@ -1,0 +1,23 @@
+body {
+  position: relative;
+  max-width: 64rem;
+  margin: 0 auto;
+
+
+  &.guest {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    text-align: center;
+    transform: translate(-50%, -50% );
+
+  }
+}
+
+a {
+  color: green;
+  font-weight: bold;
+  text-decoration: none;
+}
