@@ -1,0 +1,19 @@
+nav {
+  background: white;
+  border-bottom: gray;
+
+  div.menu {
+    display: flex;
+
+    div.menu-item {
+      flex-grow: 1;
+
+      &:last-of-type {
+        display: flex;
+        padding-right: 2rem;
+        justify-content: flex-end;
+
+      }
+    }
+  }
+}
