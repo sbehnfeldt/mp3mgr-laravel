@@ -1,16 +1,17 @@
 /* SCSS HEX */
-$color-primary: #df928eff;
+$neutral-color: #e5deda;
+
+$color-primary: #daa7a4;
 $color-primary-dark-1: darken($color-primary, 15%);
 $color-primary-dark-2: darken($color-primary, 50%);
 $color-primary-light-1: lighten($color-primary, 15%);
 $color-primary-light-2: lighten($color-primary, 50%);
 
-$color-secondary: #c58882ff;
-$color-secondary-dark-1:   darken($color-secondary, 15%);
-$color-secondary-dark-2:   darken($color-secondary, 50%);
-$color-secondary-light-1: lighten($color-secondary, 15%);
-$color-secondary-light-2: lighten($color-secondary, 50%);
+$color-action: #45a80d;
+$color-action-dark-1:   darken($color-action, 15%);
+$color-action-dark-2:   darken($color-action, 50%);
+$color-action-light-1: lighten($color-action, 15%);
+$color-action-light-2: lighten($color-action, 50%);
 
-$neutral-color: #ead2acff;
 $pale-color: #d1dedeff;
 $text-color: #1d201fff;

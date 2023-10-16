@@ -1,19 +1,41 @@
-nav {
-  background: white;
-  border-bottom: gray;
+nav.menu.primary-menu {
+    ul {
+        height: 4rem;
+        margin: 0 2rem;
 
-  div.menu {
-    display: flex;
+        list-style: none;
 
-    div.menu-item {
-      flex-grow: 1;
+        li {
+            float: left;
+            margin-right: 5rem;
 
-      &:last-of-type {
-        display: flex;
-        padding-right: 2rem;
-        justify-content: flex-end;
+            a {
+                padding-top: 1rem;
 
-      }
+                display: inline-block;;
+                width: 10rem;
+                &:link,
+                &:visited, {
+                    color: $text-color;
+
+                    &:hover {
+                        font-size: 110%;
+                        padding-top: .95rem;
+                    }
+                }
+            }
+        }
     }
-  }
+
+
+    //
+    //div.menu-item {
+    //  flex-grow: 1;
+    //
+    //  &:last-of-type {
+    //    display: flex;
+    //    padding-right: 2rem;
+    //    justify-content: flex-end;
+    //  }
+    //}
 }

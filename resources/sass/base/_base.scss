@@ -33,6 +33,11 @@ body {
     box-sizing: border-box;    /* Include padding and border in specified height and width on block-level elements */
 }
 
+main {
+    margin: .5rem auto;
+    width: 95vw;
+}
+
 .clearfix::after {
     content: "";
     clear: both;

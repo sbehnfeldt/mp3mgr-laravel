@@ -30,6 +30,12 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/details', function () {
+    return view('details', [
+        'mp3s' => Mp3File::with('artist')->with( 'album' )->get()
+    ]);
+})->middleware(['auth', 'verified'])->name('details');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
