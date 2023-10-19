@@ -30,6 +30,14 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/artists', function () {
+    return view('artists');
+})->middleware(['auth', 'verified'])->name('artists');
+
+Route::get('/albums', function () {
+    return view('albums');
+})->middleware(['auth', 'verified'])->name('albums');
+
 Route::get('/details', function () {
     return view('details', [
         'mp3s' => Mp3File::with('artist')->with( 'album' )->get()

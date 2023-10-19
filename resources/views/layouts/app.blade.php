@@ -14,6 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/js/app.js'])
     </head>
+
     <body>
         @include('layouts.page-header')
 
@@ -21,5 +22,7 @@
         <main>
             {{ $slot }}
         </main>
+
+        {{$pageScript}}
     </body>
 </html>
