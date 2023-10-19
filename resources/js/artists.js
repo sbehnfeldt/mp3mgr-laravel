@@ -1,4 +1,11 @@
-// Check for a specific element on the artists page
+import axios from 'axios';
+
 if (document.querySelector('.artists-page')) {
-    alert("Artist page ready");
+    axios.get( '/api/artists' )
+        .then(response => {
+            console.log( response.data );
+        })
+        .catch( error => {
+            alert( "Error" );
+        });
 }

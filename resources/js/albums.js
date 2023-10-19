@@ -1,4 +1,11 @@
-// Check for a specific element on the albums page
+import axios from 'axios';
+
 if (document.querySelector('.albums-page')) {
-    alert("Album page ready");
+    axios.get( '/api/albums' )
+        .then(response => {
+            console.log( response.data );
+        })
+        .catch( error => {
+            alert( "Error" );
+        });
 }

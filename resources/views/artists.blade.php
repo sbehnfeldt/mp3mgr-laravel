@@ -4,8 +4,4 @@
 
         This is the &lt;main&gt; section of the <em>Artists</em> page.
     </main>
-
-    <x-slot name="pageScript">
-        <script type="module" src="/resources/js/artists.js"></script>
-    </x-slot>
 </x-app-layout>

@@ -22,7 +22,5 @@
         <main>
             {{ $slot }}
         </main>
-
-        {{$pageScript}}
     </body>
 </html>
