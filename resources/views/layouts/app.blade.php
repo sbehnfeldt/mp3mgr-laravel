@@ -1,3 +1,5 @@
+@props(['pageClass'])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -19,7 +21,7 @@
         @include('layouts.page-header')
 
         <!-- Page Content -->
-        <main>
+        <main class="{{$pageClass}}">
             {{ $slot }}
         </main>
     </body>
