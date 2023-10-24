@@ -17,7 +17,9 @@ import jQuery from 'jquery';
                     let $td = $('<td>').text( artist.id );
                     $tr.append($td);
 
-                    $td = $('<td>').text( artist.name);
+                    let $a = $('<a>').text( artist.name).attr( 'href', '/artists/' + artist.id);
+                    $td = $('<td>');
+                    $td.append($a);
                     $tr.append($td);
 
                     $td = $('<td>' ).text( artist.albums_count );

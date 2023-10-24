@@ -34,6 +34,10 @@ Route::get('/artists', function () {
     return view('artists');
 })->middleware(['auth', 'verified'])->name('artists');
 
+Route::get('/artists/{id}', function () {
+    return view('artist');
+})->middleware(['auth', 'verified'])->name('artist');
+
 Route::get('/albums', function () {
     return view('albums');
 })->middleware(['auth', 'verified'])->name('albums');
