@@ -1,0 +1,21 @@
+ul.album-list {
+    list-style: none;
+    font-weight: bold;
+
+    li.album-title {
+        ul.track-list {
+            list-style: none;
+            font-weight: normal;
+            color: initial;
+            border-bottom: 1px solid #1d201f;
+
+            &.final {
+                border-bottom: none;
+            }
+        }
+
+        li {
+            padding-left: 3rem;
+        }
+    }
+}

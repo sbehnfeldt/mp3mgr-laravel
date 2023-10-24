@@ -19,8 +19,13 @@ import axios from "axios";
                 for ( let i = 0; i < artist.albums.length; i++ ) {
                     let album = artist.albums[i];
                     console.log( album );
-                    let $li = $('<li>').text( album.title );
-                    let $trackList = $('<ul>');
+                    let $li = $('<li>').addClass( 'album-title' ).text( album.title );
+                    let $trackList = $('<ul>').addClass( 'track-list');
+
+                    if ( artist.albums.length === i + 1) {
+                        // ref: https://stackoverflow.com/questions/13554552/why-does-classlast-of-type-not-work-as-i-expect
+                        $trackList.addClass( 'final' );
+                    }
                     for ( let j = 0; j < album.tracks.length; j++ ) {
                         let track = album.tracks[j];
                         // console.log( track );
@@ -30,6 +35,7 @@ import axios from "axios";
                     $li.append($trackList);
                     $albumList.append( $li );
                 }
+
             })
             .catch(error => {
                 alert("Error");
