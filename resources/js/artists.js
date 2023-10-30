@@ -5,19 +5,26 @@ import jQuery from 'jquery';
     'use strict';
 
     if (document.querySelector('.artists-page')) {
+
+        let $table = $('table.artists');
+
         fetch('/api/artists');
 
         function fetch(url) {
-            console.log(url);
+            $table.addClass('loading');
             axios.get(url)
                 .then(response => {
                     buildArtistsTableBody(response.data.data);
                     buildArtistsTableFooter(response.data);
+                    $table.removeClass('loading');
                 })
                 .catch(error => {
                     alert("Error");
                     console.log(error);
-                });
+                    $table.removeClass('loading');
+                }).finally(() => {
+
+            });
         }
 
         function buildArtistsTableBody(artists) {

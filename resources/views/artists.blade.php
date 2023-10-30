@@ -3,6 +3,7 @@
 
     <h2>{{ __('Artists') }}</h2>
 
+
     <table class="artists">
         <thead>
             <tr>

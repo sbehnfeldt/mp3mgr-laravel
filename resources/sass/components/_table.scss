@@ -6,6 +6,12 @@ table {
     margin: auto;
     width: 100%;
 
+    transition: .1s .1s opacity ease-in;
+
+    &.loading {
+        opacity: 20%;
+    }
+
     th, td {
         padding: 1rem 2rem;
         border: 1px solid gray;
