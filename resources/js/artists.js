@@ -50,6 +50,7 @@ import jQuery from 'jquery';
 
         function buildArtistsTableFooter(paging) {
             console.log(paging);
+
             let $tfoot = $('table.artists tfoot');
             $tfoot.empty();
             let $tr = $('<tr>');
@@ -76,17 +77,34 @@ import jQuery from 'jquery';
             }
             $td.append(button);
 
-            let span = $(`<span>Page ${paging.current_page} of ${paging.last_page}</span>`)
-            $td.append(span);
-
-            button = $('<button class="api">').text('>').on('click', () => {
-                fetch(paging.next_page_url)
+            let $input = $('<input type="number">');
+            $input.val(`${paging.current_page}`);
+            $input.on('change', () => {
+                fetch(`/api/artists?page=${$input.val()}`)
             });
+
+            $td.append('Page ').append($input).append(`of ${paging.last_page}`);
+
+            button = $('<button class="api">').text('>');
+            if ( paging.next_page_url) {
+                button.on('click', () => {
+                    fetch(paging.next_page_url)
+                });
+            } else {
+                button.attr('disabled', 'disabled');
+            }
+
             $td.append(button);
 
-            button = $('<button class="api">').text('>>').on('click', () => {
-                fetch(paging.last_page_url);
-            });
+            button = $('<button class="api">').text('>>');
+            if ( paging.next_page_url) {
+                button.on('click', () => {
+                    fetch(paging.last_page_url)
+                });
+            } else {
+                button.attr('disabled', 'disabled');
+            }
+
             $td.append(button);
 
             $tr.append($td);
