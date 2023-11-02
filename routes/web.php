@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Album;
+use App\Models\Artist;
 use App\Models\Mp3File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +28,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard', [
-        'mp3s' => Mp3File::with('artist')->with( 'album' )->get()
+        'artists' => Artist::count(),
+        'albums'  => Album::count(),
+        'tracks'  => Mp3File::count()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

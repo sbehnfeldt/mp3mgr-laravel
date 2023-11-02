@@ -1,38 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <x-slot name="pageClass">dashboard-page</x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Artist</th>
-                                <th>Album</th>
-                                <th>Track #</th>
-                                <th>Filename</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($mp3s as $mp3)
-                            <tr>
-                                <td>{{$mp3->title}}</td>
-                                <td>{{$mp3->artist?->name}}</td>
-                                <td>{{$mp3->album?->title}}</td>
-                                <td>{{$mp3->track}}</td>
-                                <td>{{$mp3->filename}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h2>{{ __('Dashboard') }}</h2>
+    <a href="/artists">Artists</a>: {{$artists}}<br/>
+    <a href="/albums">Albums</a>: {{$albums}}<br/>
+    <a href="/tracks">Tracks</a>: {{$tracks}}<br/>
+
 </x-app-layout>
