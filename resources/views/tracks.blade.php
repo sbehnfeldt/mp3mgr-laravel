@@ -1,34 +1,38 @@
 <x-app-layout>
-    <x-slot name="pageClass">artists-page</x-slot>
+    <x-slot name="pageClass">tracks-page</x-slot>
 
-    <h2>{{ __('Artists') }}</h2>
+    <h2>{{ __('Tracks') }}</h2>
 
-
-    <table class="artists">
+    <table class="tracks">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Artist Name</th>
-                <th>Number of Albums</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Track #</th>
+                <th>Filename</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        </tbody>
         <tfoot></tfoot>
     </table>
 
     @verbatim
-        <script id="artist-row-template" type="text/x-handlebars-template">
+        <script id="tracks-table-row-template" type="text/x-handlebars-template">
             <tr>
-                <td>{{id}}</td>
-                <td><a href="/artists/{{id}}">{{name}}</a></td>
-                <td>{{albums_count}}</td>
+                <td>{{title}}</td>
+                <td>{{artist.name}}</td>
+                <td>{{album.title}}</td>
+                <td>{{track}}</td>
+                <td>{{filename}}</td>
             </tr>
         </script>
 
-        <script id="artists-table-footer-template" type="text/x-handlebars-template">
+        <script id="tracks-table-footer-template" type="text/x-handlebars-template">
             <tr>
                 <td colspan="9999">
-                    <button class="paging paging-initial" {{disabled.backwards}}>
+                    <button class="paging paging-initial" {{disabled.backwards}} onClick="() => fetch( '/api/artists')">
                         &lt;&lt;
                     </button>
                     <button class="paging paging-previous" {{disabled.backwards}}>&lt;</button>
@@ -39,5 +43,4 @@
             </tr>
         </script>
     @endverbatim
-
 </x-app-layout>

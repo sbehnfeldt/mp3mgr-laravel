@@ -46,11 +46,10 @@ Route::get('/albums', function () {
     return view('albums');
 })->middleware(['auth', 'verified'])->name('albums');
 
-Route::get('/details', function () {
-    return view('details', [
-        'mp3s' => Mp3File::with('artist')->with( 'album' )->get()
+Route::get('/tracks', function () {
+    return view('tracks', [
     ]);
-})->middleware(['auth', 'verified'])->name('details');
+})->middleware(['auth', 'verified'])->name('tracks');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

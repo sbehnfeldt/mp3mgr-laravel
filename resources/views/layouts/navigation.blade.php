@@ -19,8 +19,8 @@
             {{ __('Albums') }}
         </x-nav-link>
 
-        <x-nav-link :href="route('details')" :active="request()->routeIs('details')">
-            {{ __('Details') }}
+        <x-nav-link :href="route('tracks')" :active="request()->routeIs('tracks')">
+            {{ __('Tracks') }}
         </x-nav-link>
     </ul>
 </nav>
