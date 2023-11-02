@@ -1,13 +1,14 @@
 import axios from 'axios';
 import jQuery from 'jquery';
+import Handlebars from "handlebars";
 
-;(function (global, $) {
+
+(function (global, $) {
     'use strict';
 
     if (document.querySelector('.artists-page')) {
 
         let $table = $('table.artists');
-
         fetch('/api/artists');
 
         function fetch(url) {
@@ -16,99 +17,58 @@ import jQuery from 'jquery';
                 .then(response => {
                     buildArtistsTableBody(response.data.data);
                     buildArtistsTableFooter(response.data);
-                    $table.removeClass('loading');
                 })
                 .catch(error => {
                     alert("Error");
                     console.log(error);
-                    $table.removeClass('loading');
                 }).finally(() => {
-
-            });
+                    $table.removeClass('loading');
+                }
+            );
         }
 
         function buildArtistsTableBody(artists) {
             let $tbody = $('table.artists tbody');
             $tbody.empty();
+
+            let source   = $('#artist-row-template')[0].innerHTML;
+            let template = Handlebars.compile(source);
+
             for (let i = 0; i < artists.length; i++) {
                 let artist = artists[i];
-                let $tr    = $('<tr>');
-                let $td    = $('<td>').text(artist.id);
-                $tr.append($td);
-
-                let $a = $('<a>').text(artist.name).attr('href', '/artists/' + artist.id);
-                $td    = $('<td>');
-                $td.append($a);
-                $tr.append($td);
-
-                $td = $('<td>').text(artist.albums_count);
-                $tr.append($td);
-
-                $tbody.append($tr);
+                $tbody.append(template(artist));
             }
         }
 
         function buildArtistsTableFooter(paging) {
-            console.log(paging);
-
             let $tfoot = $('table.artists tfoot');
             $tfoot.empty();
-            let $tr = $('<tr>');
 
-            let $td = $('<td colspan="999">');
+            let source      = $('#artists-table-footer-template')[0].innerHTML;
+            let template    = Handlebars.compile(source);
+            paging.disabled = {
+                'backwards': paging.current_page === 1 ? 'disabled' : '',
+                'forwards': paging.current_page === paging.last_page ? 'disabled' : ''
+            };
+            $tfoot.append(template(paging));
 
-            let button = $('<button class="api">').text('<<');
-            if (1 < paging.current_page) {
-                button.on('click', () => {
-                    fetch(paging.first_page_url)
-                });
-            } else {
-                button.prop('disabled', true);
+            // Assign on-click handlers to the paging buttons
+            let map = {
+                'paging-initial': paging.first_page_url,
+                'paging-previous': paging.prev_page_url,
+                'paging-next': paging.next_page_url,
+                'paging-final': paging.last_page_url
             }
-            $td.append(button);
-
-            button = $('<button class="api">').text('<');
-            if (1 < paging.current_page) {
-                button.on('click', () => {
-                    fetch(paging.prev_page_url)
-                });
-            } else {
-                button.attr('disabled', 'disabled');
-            }
-            $td.append(button);
-
-            let $input = $('<input type="number">');
-            $input.val(`${paging.current_page}`);
-            $input.on('change', () => {
-                fetch(`/api/artists?page=${$input.val()}`)
+            Object.keys(map).forEach((k) => {
+                $tfoot.off('click', `button.${k}`)
+                    .on('click', `button.${k}`, () => {
+                        fetch(map[k]);
+                    })
             });
-
-            $td.append('Page ').append($input).append(`of ${paging.last_page}`);
-
-            button = $('<button class="api">').text('>');
-            if ( paging.next_page_url) {
-                button.on('click', () => {
-                    fetch(paging.next_page_url)
+            $tfoot.off('change', 'input.paging-current')
+                .on('change', 'input.paging-current', (event, b, c) => {
+                    fetch(`/api/artists?page=${event.currentTarget.value}`)
                 });
-            } else {
-                button.attr('disabled', 'disabled');
-            }
-
-            $td.append(button);
-
-            button = $('<button class="api">').text('>>');
-            if ( paging.next_page_url) {
-                button.on('click', () => {
-                    fetch(paging.last_page_url)
-                });
-            } else {
-                button.attr('disabled', 'disabled');
-            }
-
-            $td.append(button);
-
-            $tr.append($td);
-            $tfoot.append($tr);
         }
     }
 })(this, jQuery);
